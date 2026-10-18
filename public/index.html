@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tela Live</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<!-- ============ PORTAL DE ENTRADA ============ -->
+<div id="gate" class="gate">
+  <form id="login" class="gate-card" autocomplete="off">
+    <div class="logo"><span class="dot"></span> TELA<span>LIVE</span></div>
+    <h2>Entrar na sala</h2>
+    <p class="sub">Precisa da senha que o host passou.</p>
+
+    <label>Seu nome
+      <input id="in-name" maxlength="24" placeholder="ex: Vidda" required>
+    </label>
+    <label>Senha da sala
+      <input id="in-pass" type="password" placeholder="••••••••" required>
+    </label>
+
+    <label class="check remember"><input id="remember-login" type="checkbox" checked> lembrar login neste dispositivo</label>
+    <div class="err" id="gate-err"></div>
+    <button class="btn primary full" type="submit">Entrar</button>
+    <div class="gate-foot">Sem instalar nada · funciona no celular</div>
+  </form>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" hidden>
+  <header>
+    <div class="logo"><span class="dot"></span> TELA<span>LIVE</span></div>
+    <div class="who">
+      <span id="me-name"></span>
+      <span class="role" id="me-role">espectador</span>
+    </div>
+    <div class="badge" id="badge">offline</div>
+    <button id="btn-logout" class="btn ghost logout-btn" type="button">Sair</button>
+  </header>
+
+  <main>
+    <!-- painel lateral: controles do host -->
+    <aside class="side">
+      <section class="panel" id="host-panel">
+        <h3>Painel do host</h3>
+        <div class="controls">
+          <button id="btn-start" class="btn primary">Transmitir tela</button>
+          <button id="btn-stop" class="btn ghost" disabled>Parar</button>
+        </div>
+
+        <div class="opts">
+          <label>Qualidade <input type="range" id="quality" min="20" max="95" value="60"><b id="qval">60</b></label>
+          <label>FPS <input type="range" id="fps" min="1" max="60" value="60"><b id="fval">60</b></label>
+          <label>Largura máx.
+            <select id="maxw">
+              <option value="854">854p</option>
+              <option value="1280" selected>1280p</option>
+              <option value="1920">1920p</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="audio" checked> áudio do sistema</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h3>Na sala <span id="count">0</span></h3>
+        <ul id="roster" class="roster"></ul>
+      </section>
+
+      <section class="panel stats">
+        <div><b id="stat-fps">0</b><small>fps</small></div>
+        <div><b id="stat-bitrate">0</b><small>kbps</small></div>
+      </section>
+    </aside>
+
+    <!-- tela -->
+    <section class="screen-wrap">
+      <div class="screen">
+        <video id="preview" autoplay muted playsinline hidden></video>
+        <img id="screen-image" alt="Tela compartilhada" hidden>
+        <audio id="room-audio" autoplay></audio>
+        <div class="placeholder" id="placeholder">
+          <svg viewBox="0 0 24 24" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <span id="ph-text">aguardando o host transmitir</span>
+        </div>
+        <div class="live-tag" id="live-tag">● AO VIVO</div>
+      </div>
+      <button id="btn-fullscreen" class="btn ghost fullscreen-btn" type="button">Tela cheia</button>
+      <button id="btn-audio" class="btn ghost audio-btn" type="button" hidden>Ativar áudio</button>
+      <p class="hint" id="share-hint"></p>
+    </section>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

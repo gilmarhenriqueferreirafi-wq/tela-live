@@ -1,0 +1,8 @@
+{
+  "admin": {
+    "nome": "gilmar",
+    "senha": "gil18092010"
+  },
+  "nomeSala": "Tela do Gilmar",
+  "limiteTentativas": 6
+}
